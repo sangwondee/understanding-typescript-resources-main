@@ -1,4 +1,6 @@
-let userName: string; // number, boolean
+// เครื่องหมาย : หมายถึงบอกชนิดของตัวแปรใน TypeScript
+let userName: string; // number, boolean 
+
 let userAge = 38;
 
 // ...
@@ -14,4 +16,3 @@ add(10);
 // add('10');
 add(10, 6);
 // add(10, '6');
-
