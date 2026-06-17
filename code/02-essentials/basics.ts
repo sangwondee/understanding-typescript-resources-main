@@ -1,4 +1,4 @@
-// เครื่องหมาย : หมายถึงบอกชนิดของตัวแปรใน TypeScript
+// เครื่องหมาย : หมายถึงกำหนดชนิดตัวแปลของตัวแปรใน TypeScript  
 let userName: string; // number, boolean 
 
 let userAge = 38;
