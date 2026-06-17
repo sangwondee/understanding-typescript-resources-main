@@ -9,6 +9,7 @@
 // ตอนทำงานกับ legacy code ที่ type ซับซ้อนมากและค่อย ๆ refactor ทีหลัง
 // ตอน library ไม่มี type definition หรือ type ผิด
 
+// UnionType สามารถกำหนดค่า type ได้หลาย type
 let age: string | number = 36;
 
 // ...
