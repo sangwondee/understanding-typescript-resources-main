@@ -31,3 +31,12 @@ let user: {
     hobbies: ['Sports', 'Cooking'],
     role: { description: 'Admin', id: 5 }
 };
+
+// กำหนดค่า object ให้มีค่าเป็น string หรือ number ได้ แต่ไม่สามารถกำหนดค่าเป็น null หรือ undefined ได้
+let val: {} = 'is a value';
+
+let data: Record<string, string | number> 
+data = {
+    name: 'Max',
+    age: 38
+};
