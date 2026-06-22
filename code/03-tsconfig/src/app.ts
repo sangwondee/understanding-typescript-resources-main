@@ -1,6 +1,6 @@
 import fs from 'node:fs';
 
-// fs.readFileSync()
+fs.readFileSync('./src/app.ts', 'utf8');
 
 let userName: string;
 
@@ -12,4 +12,4 @@ function add(a: any, b: any) {
   return a + b;
 }
 
-console.log(add(1, 2));
+console.log(add(3, 2));
