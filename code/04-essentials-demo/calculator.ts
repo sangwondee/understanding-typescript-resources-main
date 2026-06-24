@@ -1,8 +1,8 @@
-// data:
-// initial amount
-// annual contribution
-// expected return
-// duration
+// data : 
+// initial amount หมายถึง จำนวนเงินเริ่มต้นที่ลงทุน
+// annual contribution หมายถึง จำนวนเงินที่ลงทุนเพิ่มในแต่ละปี
+// expected return หมายถึง อัตราผลตอบแทนที่คาดหวัง
+// duration หมายถึง ระยะเวลาการลงทุน
 
 type InvestmentData = {
   initialAmount: number;
@@ -18,21 +18,21 @@ type InvestmentResult = {
   totalInterestEarned: number;
 };
 
-type CalculationResult = InvestmentResult[] | string;
+type CalculationResults = InvestmentResult[] | string;
 
-function calculateInvestment(data: InvestmentData): CalculationResult {
+function calculateInvestment(data: InvestmentData): CalculationResults {
   const { initialAmount, annualContribution, expectedReturn, duration } = data;
 
   if (initialAmount < 0) {
-    return 'Initial investment amount must be at least zero.'
+    return "Initial investment amount must be at least a zero.";
   }
 
   if (duration <= 0) {
-    return 'No valid amount of years provided.'
+    return "No valid amount of years provided.";
   }
 
   if (expectedReturn < 0) {
-    return 'Expected return must be at least zero.'
+    return "Expected return must be at least zero.";
   }
 
   let total = initialAmount;
@@ -41,36 +41,37 @@ function calculateInvestment(data: InvestmentData): CalculationResult {
 
   const annualResults: InvestmentResult[] = [];
 
-  for (let i = 0; i < duration; i++) {
+  for (let year = 1; year <= duration; year++) {
     total = total * (1 + expectedReturn);
     totalInterestEarned = total - totalContributions - initialAmount;
     totalContributions = totalContributions + annualContribution;
     total = total + annualContribution;
-
+    
     annualResults.push({
-      year: `Year ${i + 1}`,
+      year: `Year ${year}`,
       totalAmount: total,
-      totalInterestEarned,
-      totalContributions
+      totalContributions: totalContributions,
+      totalInterestEarned: totalInterestEarned
     });
   }
 
   return annualResults;
-}
+} 
 
-function printResults(results: CalculationResult) {
+function printResults(results: CalculationResults) {
   if (typeof results === 'string') {
     console.log(results);
     return;
   }
 
-  for (const yearEndResult of results) {
-    console.log(yearEndResult.year);
-    console.log(`Total: ${yearEndResult.totalAmount.toFixed(0)}`);
-    console.log(`Total Contributions: ${yearEndResult.totalContributions.toFixed(0)}`);
-    console.log(`Total Interest Earned: ${yearEndResult.totalInterestEarned.toFixed(0)}`);
-    console.log('----------------------');
+  for (const result of results) {
+    console.log(result.year);
+    console.log(`Total Amount: ${result.totalAmount.toFixed(0)}`);
+    console.log(`Total Contributions: ${result.totalContributions.toFixed(0)}`);
+    console.log(`Total Interest Earned: ${result.totalInterestEarned.toFixed(0)}`);
+    console.log('---------------------------');
   }
+
 }
 
 const investmentData: InvestmentData = {
