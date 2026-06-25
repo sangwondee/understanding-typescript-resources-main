@@ -34,6 +34,13 @@ const hobbies = ['Sports', 'Cooking'];
 const activeHobbies = ['Hiking'];
 
 activeHobbies.push(...hobbies);
+activeHobbies // ['Hiking', 'Sports', 'Cooking']
+
+// ถ้าหากเป็น .push จะได้เป็น ['Hiking', ['Sports', 'Cooking']] เลย แต่ถ้าเป็น ... จะได้เป็น ['Hiking', 'Sports', 'Cooking'] เลย
+// activeHobbies ['Hiking', ['Sports', 'Cooking']]
+
+
+// ต่างจาก .push เลยตรงๆ ที่ .push จะเพิ่ม array เข้าไปเป็น element ของ array อีกที แต่ ... จะเอา element ของ array นั้นๆ มาใส่ใน array ใหม่เลย
 
 const person = {
   firstName: 'Max',
@@ -42,13 +49,14 @@ const person = {
 
 const copiedPerson = { ...person };
 
+// ...numbers เพราะเราจะไม่รู้ว่ามีจำนวนกี่ตัวเลขที่เราจะส่งเข้ามาในฟังก์ชัน add ดังนั้นเราจึงใช้ ...numbers เพื่อให้สามารถรับจำนวนตัวเลขได้ไม่จำกัด
 const add = (...numbers: number[]) => {
   return numbers.reduce((curResult, curValue) => {
     return curResult + curValue;
   }, 0);
 };
 
-const addedNumbers = add(5, 10, 2, 3.7);
+const addedNumbers = add(5, 10, 2, 3, 5);
 console.log(addedNumbers);
 
 const [hobby1, hobby2, ...remainingHobbies] = hobbies;
