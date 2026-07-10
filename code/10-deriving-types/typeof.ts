@@ -11,10 +11,15 @@ const settings = {
   players: ['John', 'Jane']
 };
 
-// type Settings = typeof settings;
+type Settings = typeof settings;
 
 function loadData(s: typeof settings) {
   // ...
+
+  console.log(`Difficulty: ${s.difficulty}`);
+  console.log(`Min Level: ${s.minLevel}`);
+  console.log(`Did Start: ${s.didStart}`);
+  console.log(`Players: ${s.players.join(', ')}`);
 }
 
 loadData(settings);
