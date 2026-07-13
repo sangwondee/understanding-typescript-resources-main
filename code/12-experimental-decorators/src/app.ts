@@ -8,28 +8,28 @@ function Logger(logString: string) {
 
 function WithTemplate(template: string, hookId: string) {
   console.log('TEMPLATE FACTORY');
-  return function<T extends { new (...args: any[]): { name: string } }>(
-    originalConstructor: T
-  ) {
+  return function<T extends { new (...args: any[]) : { name: string}}>(originalConstructor: T) 
+  {
     return class extends originalConstructor {
       constructor(..._: any[]) {
         super();
-        console.log('Rendering template');
-        const hookEl = document.getElementById(hookId);
-        if (hookEl) {
-          hookEl.innerHTML = template;
-          hookEl.querySelector('h1')!.textContent = this.name;
-        }
+        console.log(`Rendering template`);
+      const hookEl = document.getElementById(hookId)
+      if (hookEl) {
+        hookEl.innerHTML = template;
+        hookEl.querySelector('h1')!.textContent = this.name;
+      } 
       }
     };
   };
 }
 
-// @Logger('LOGGING - PERSON')
 @Logger('LOGGING')
-@WithTemplate('<h1>My Person Object</h1>', 'app')
+@WithTemplate('<h1>AAA</h1>', 'app')
+// Decorators จะเรียงการทำงานจากบนไปล่าง
+// @Logger('LOGGING - PERSON')
 class Person {
-  name = 'Max';
+  name = 'A'
 
   constructor() {
     console.log('Creating person object...');
@@ -48,7 +48,7 @@ function Log(target: any, propertyName: string | Symbol) {
 }
 
 function Log2(target: any, name: string, descriptor: PropertyDescriptor) {
-  console.log('Accessor decorator!');
+  console.log(`Accessor decorator`);
   console.log(target);
   console.log(name);
   console.log(descriptor);
@@ -71,13 +71,13 @@ function Log4(target: any, name: string | Symbol, position: number) {
   console.log(name);
   console.log(position);
 }
-
 class Product {
   @Log
   title: string;
   private _price: number;
 
   @Log2
+  // คือค่าที่รับเข้ามาจากเพื่อ set ค่า
   set price(val: number) {
     if (val > 0) {
       this._price = val;
@@ -115,7 +115,7 @@ function Autobind(_: any, _2: string, descriptor: PropertyDescriptor) {
 
 class Printer {
   message = 'This works!';
-
+  
   @Autobind
   showMessage() {
     console.log(this.message);
@@ -126,9 +126,8 @@ const p = new Printer();
 p.showMessage();
 
 const button = document.querySelector('button')!;
-button.addEventListener('click', p.showMessage);
-
-// ---
+ // เครื่องหมาย ! คือตรวจสอบว่ามีค่าไหม
+button.addEventListener('click', p.showMessage)
 
 interface ValidatorConfig {
   [property: string]: {
@@ -192,12 +191,13 @@ courseForm.addEventListener('submit', event => {
   const priceEl = document.getElementById('price') as HTMLInputElement;
 
   const title = titleEl.value;
-  const price = +priceEl.value;
+  const price = +priceEl.value; 
+  // เครื่องหมายบวกข้างหน้าคือเอาค่ามาแปลงเป็นตัวเลข
 
   const createdCourse = new Course(title, price);
 
   if (!validate(createdCourse)) {
-    alert('Invalid input, please try again!');
+    alert(`Invalid input, please try again`);
     return;
   }
   console.log(createdCourse);
